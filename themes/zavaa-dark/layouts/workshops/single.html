@@ -1,0 +1,12 @@
+{{ define "main" }}
+<article class="reveal" style="--delay:0s">
+  <h1>{{ .Title }}</h1>
+  <p>{{ .Params.description }}</p>
+  <ul>
+    {{ with .Params.format }}<li>Format: {{ . }}</li>{{ end }}
+    {{ with .Params.duration }}<li>Duration: {{ . }}</li>{{ end }}
+    {{ with .Params.price }}<li>Price: {{ . }}</li>{{ end }}
+  </ul>
+  {{ with .Params.booking_url }}<p><a href="{{ . }}">Book now</a></p>{{ end }}
+</article>
+{{ end }}

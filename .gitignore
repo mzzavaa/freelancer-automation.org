@@ -1,0 +1,9 @@
+# Hugo generated
+/public/
+/resources/
+
+# OS files
+.DS_Store
+
+# Python envs
+venv/

@@ -1,0 +1,105 @@
+{{ define "main" }}
+<div class="hero reveal" style="--delay:0s">
+  {{ partial "blob.html" . }}
+  {{ partial "blob.html" . }}
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Site.Params.description }}</p>
+    <p><a href="{{ .Site.BaseURL }}guides/" class="cta">Browse guides</a></p>
+  </div>
+</div>
+{{ if .Site.Params.homeIntro }}
+<div class="intro">
+  <p>{{ .Site.Params.homeIntro }}</p>
+  {{ if and .Site.Params.homeFeatures .Site.Params.homeFeatureIcons }}
+  <ul class="features">
+    {{ range $i, $feat := .Site.Params.homeFeatures }}
+      <li><svg class="icon"><use href="/icons.svg#{{ index $.Site.Params.homeFeatureIcons $i }}"></use></svg>{{ $feat }}</li>
+    {{ end }}
+  </ul>
+  {{ else if .Site.Params.homeFeatures }}
+  <ul class="features">
+    {{ range .Site.Params.homeFeatures }}<li>{{ . }}</li>{{ end }}
+  </ul>
+  {{ end }}
+</div>
+{{ end }}
+{{ if .Site.Params.homeTestimonial }}
+<div class="divider"></div>
+<div class="testimonial">
+  <p>{{ .Site.Params.homeTestimonial }}</p>
+  {{ with .Site.Params.homeTestimonialAuthor }}<div class="author">{{ . }}</div>{{ end }}
+</div>
+{{ end }}
+{{ if .Site.Params.homeAboutText }}
+<div class="about">
+  {{ with .Site.Params.homeAboutImage }}
+  <img class="photo" src="{{ . }}" alt="About me">
+  {{ end }}
+  <div class="text"><p>{{ .Site.Params.homeAboutText }}</p></div>
+</div>
+{{ end }}
+{{ if .Site.Params.homeServices }}
+<div class="services">
+  {{ range $i, $svc := .Site.Params.homeServices }}
+  <div class="service-card">
+    {{ with $svc.icon }}<svg class="icon"><use href="/icons.svg#{{ . }}"></use></svg>{{ else }}<svg class="icon"><use href="/icons.svg#icon-project"></use></svg>{{ end }}
+    <h3>{{ $svc.title }}</h3>
+    <p>{{ $svc.description }}</p>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
+
+{{ if .Site.Params.homeStats }}
+<div class="stats">
+  {{ partial "blob.html" . }}
+  {{ range .Site.Params.homeStats }}
+  <div class="stat-card">
+    <svg class="icon"><use href="/icons.svg#icon-chart"></use></svg>
+    <div class="value">{{ .value }}</div>
+    <div class="label">{{ .label }}</div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
+
+
+{{ if .Site.Params.homeClients }}
+<div class="clients">
+  <svg class="icon"><use href="/icons.svg#icon-clients"></use></svg>
+  {{ range .Site.Params.homeClients }}
+  <div class="client-logo"><img src="{{ .logo }}" alt="{{ .name }}"></div>
+  {{ end }}
+</div>
+{{ end }}
+{{ if .Site.Params.homeFeaturedProjectTitle }}
+<div class="project-highlight">
+  <h2>{{ .Site.Params.homeFeaturedProjectTitle }}</h2>
+  {{ with .Site.Params.homeFeaturedProjectImage }}<img src="{{ . }}" alt="{{ $.Site.Params.homeFeaturedProjectTitle }}">
+  {{ end }}
+  {{ with .Site.Params.homeFeaturedProjectLink }}<p><a href="{{ . }}">Learn more →</a></p>{{ end }}
+  {{ if .Site.Params.homeNewsletterAction }}
+  <form class="newsletter" action="{{ .Site.Params.homeNewsletterAction }}" method="post" style="margin-top:1.5rem;">
+    <input type="email" name="email" placeholder="Enter your email" required style="padding:0.75rem 1rem;border:1px solid #ccc;border-radius:4px;"> 
+    <button type="submit" style="padding:0.75rem 1.5rem;margin-left:0.5rem;background:var(--accent);color:#fff;border:none;border-radius:4px;cursor:pointer;">Subscribe</button>
+  </form>
+  {{ end }}
+</div>
+{{ end }}
+
+{{ if .Site.Params.homeCTA }}
+<div class="cta-banner"><a class="cta" href="{{ .Site.Params.homeCTAUrl }}">{{ .Site.Params.homeCTA }}</a></div>
+{{ end }}
+<div class="posts">
+  {{ range $i, $p := first 5 .Site.RegularPages.ByDate.Reverse }}
+    <div class="card reveal" style="--delay:calc({{ $i }}*0.1s)">
+      <h2><a href="{{ $p.Permalink }}">{{ $p.Title }}</a></h2>
+      <small>{{ $p.Date.Format "2006-01-02" }}</small>
+      <p>{{ $p.Params.description }}</p>
+      <p><a href="{{ $p.Permalink }}">Read more →</a></p>
+    </div>
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,49 @@
+{{ define "main" }}
+<section class="single-hero">
+  <div class="container">
+    <a href="/{{ .Section }}/" class="single-back">
+      <i data-lucide="arrow-left"></i>
+      Back to {{ .Section | title }}
+    </a>
+    <div class="single-meta">
+      <span class="post-section">{{ .Section | title }}</span>
+      <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+    </div>
+    <h1 class="single-title">{{ .Title }}</h1>
+    {{ with .Params.description }}
+    <p class="single-description">{{ . }}</p>
+    {{ end }}
+  </div>
+</section>
+
+<section class="single-body">
+  <div class="container">
+    <div class="single-content">
+      {{ .Content }}
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section cta-section" id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-bg-glow"></div>
+      <span class="section-label">
+        <i data-lucide="rocket"></i>
+        Need Help?
+      </span>
+      <h2 class="cta-title">Let's build your automation together</h2>
+      <p class="cta-subtitle">
+        Want custom automation for your freelance business? Let's talk.
+      </p>
+      <div class="cta-actions">
+        <a href="https://outlook.office365.com/owa/calendar/Letstalk1@lindamohamed.com/bookings/" class="btn btn-primary btn-large" target="_blank">
+          <i data-lucide="calendar"></i>
+          Book a Free Call
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

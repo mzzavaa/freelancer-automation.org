@@ -1,0 +1,11 @@
+{{ define "main" }}
+<div class="main-inner">
+<article class="reveal" style="--delay:0s">
+  {{ with .Params.image }}
+  <div class="post-image" style="background-image:url('{{ . }}');"></div>
+  {{ end }}
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</article>
+</div>
+{{ end }}

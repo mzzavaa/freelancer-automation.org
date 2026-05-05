@@ -1,0 +1,30 @@
+{{ if eq .Section "guides" }}
+  {{/* derive slug from filename without extension */}}
+  {{ $slug := (path.Base .File.Path) | replace ".md" "" }}
+  {{ $items := where site.RegularPages "Params.pillar" $slug }}
+  {{ if gt (len $items) 0 }}
+    <section class="related-cluster">
+      <h2>Related content</h2>
+      {{ range $section, $pages := (dict) }}{{ end }}
+      {{/* group by section manually */}}
+      {{ $groups := dict }}
+      {{ range $items }}
+        {{ $sec := .Section }}
+        {{ $existing := index $groups $sec }}
+        {{ if not $existing }}
+          {{ $groups = merge $groups (dict $sec (slice .)) }}
+        {{ else }}
+          {{ $groups = merge $groups (dict $sec (append $existing .)) }}
+        {{ end }}
+      {{ end }}
+      {{ range $sec, $pages := $groups }}
+        <h3>{{ $sec | title }}</h3>
+        <ul>
+        {{ range $pages }}
+          <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ end }}
+        </ul>
+      {{ end }}
+    </section>
+  {{ end }}
+{{ end }}

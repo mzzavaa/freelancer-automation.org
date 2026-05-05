@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://freelancer-automation.com/sitemap.xml

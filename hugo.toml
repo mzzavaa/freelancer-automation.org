@@ -1,0 +1,65 @@
+baseURL = "https://freelancer-automation.org"
+languageCode = "en-us"
+title = "Freelancer Automation"
+# Using custom layouts in /layouts folder
+
+taxonomies = {tag="tags", category="categories"}
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[outputFormats.RSS]
+  mediaType = "application/rss+xml"
+  baseName = "index"
+  isPlainText = false
+
+[params]
+  description = "Daily automation tips, open-source tools, and guides for freelancers"
+  homeIntro = "A hub for freelancers who want to automate tedious tasks, build tools, and learn from real projects."
+  homeFeatures = ["Automation tips","Open-source code","In-depth guides","Build logs & workshops"]
+  homeTestimonial = "\"I cut my proposal writing time in half with the scripts I found here.\""
+  homeTestimonialAuthor = "— Alex, freelance dev"
+  # list of services offered on homepage
+  homeServices = [
+    { title="Automation Scripts", description="Prebuilt scripts you can adapt.", icon="icon-daily" },
+    { title="Open‑Source Tools", description="Use or contribute to our repos.", icon="icon-oss" },
+    { title="Custom Guides", description="Step‑by‑step tutorials for complex workflows.", icon="icon-guides" }
+  ]
+  # example featured project
+  homeFeaturedProjectTitle = "Invoice Reminder Tool"
+  homeFeaturedProjectImage = "/images/project-invoice-1.jpg"
+  homeFeaturedProjectLink = "/open-source/invoice-generator/"
+  homeNewsletterAction = "https://example.com/subscribe"
+  homeAboutText = "I’m a freelancer who builds automation tools and writes about the journey. My mission is to help others save time, ship code, and think in systems."
+  homeAboutImage = "/images/about-me.jpg"
+  homeFeatureIcons = ["icon-daily","icon-oss","icon-guides","icon-log"]
+  # optional stats shown as large counters
+  homeStats = [
+    { label="Projects shipped", value="120+" },
+    { label="Subscribers", value="5k+" },
+    { label="Free scripts", value="30+" }
+  ]
+  # showcase a few client logos
+  homeClients = [
+    { name="Acme", logo="/images/clients/acme.png" },
+    { name="Globex", logo="/images/clients/globex.png" },
+    { name="Umbrella", logo="/images/clients/umbrella.png" }
+  ]
+  # simple call‑to‑action button banner
+  homeCTA = "Work with me"
+  homeCTAUrl = "/contact/"
+  templatesUrl = "https://freelancer-templates.dev"
+  githubUrl = "https://github.com/mzzavaa/freelancer-automation-site"
+
+[markup.highlight]
+  style = "monokai"
+  lineNos = false
+  noClasses = true
+
+[pagination]
+  pagerSize = 10
+
+[sitemap]
+  changefreq = "daily"
+  priority = 0.5

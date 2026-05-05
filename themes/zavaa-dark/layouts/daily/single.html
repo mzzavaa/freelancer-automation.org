@@ -1,0 +1,8 @@
+{{ define "main" }}
+{{ partial "pillar-link.html" . }}
+<article class="reveal" style="--delay:0s">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</article>
+{{ partial "related-posts.html" . }}
+{{ end }}

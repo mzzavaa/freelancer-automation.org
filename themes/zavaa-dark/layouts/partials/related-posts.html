@@ -1,0 +1,28 @@
+{{ if eq .Section "daily" }}
+  {{ $max := 3 }}
+  {{ $matches := slice }}
+  {{ with .Params.pillar }}
+    {{ $matches = where site.RegularPages "Params.pillar" . }}
+  {{ end }}
+  {{ if lt (len $matches) $max }}
+    {{ $needed := sub $max (len $matches) }}
+    {{ $byTag := where site.RegularPages "Type" "daily" }}
+    {{ range $t := .Params.tags }}
+      {{ $byTag = where $byTag "Params.tags" "intersect" (slice $t) }}
+    {{ end }}
+    {{ $byTag = shuffle $byTag }}
+    {{ range first $needed $byTag }}
+      {{ $matches = $matches | append . }}
+    {{ end }}
+  {{ end }}
+  {{ if gt (len $matches) 0 }}
+    <section class="related-posts">
+      <h2>Related posts</h2>
+      <ul>
+      {{ range first $max $matches }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+      {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+{{ end }}

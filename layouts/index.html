@@ -1,0 +1,150 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <div class="hero-bg-grid"></div>
+  <div class="container">
+    <div class="hero-badge">
+      <i data-lucide="zap"></i>
+      Automation for Freelancers
+    </div>
+    <h1 class="hero-headline">
+      Stop doing repetitive tasks.<br />
+      <span class="gradient-text">Automate everything.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Daily automation tips, open-source tools, and step-by-step guides to help freelancers save time and scale their business.
+    </p>
+    <div class="hero-actions">
+      <a href="/guides/" class="btn btn-primary">
+        <i data-lucide="book-open"></i>
+        Browse Guides
+      </a>
+      <a href="/open-source/" class="btn btn-ghost">
+        <i data-lucide="github"></i>
+        Open Source Tools
+      </a>
+    </div>
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-value">30+</span>
+        <span class="stat-label">Free Scripts</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-value">Daily</span>
+        <span class="stat-label">New Tips</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-value">100%</span>
+        <span class="stat-label">Open Source</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What You'll Find Section -->
+<section class="section features" id="features">
+  <div class="container">
+    <span class="section-label">
+      <i data-lucide="layers"></i>
+      What You'll Find
+    </span>
+    <h2 class="section-title">Everything you need to automate your freelance workflow</h2>
+    <p class="section-subtitle">From quick scripts to complete systems — all designed for busy freelancers.</p>
+    
+    <div class="features-grid">
+      <a href="/daily/" class="feature-card">
+        <div class="feature-icon">
+          <i data-lucide="calendar"></i>
+        </div>
+        <h3>Daily Tips</h3>
+        <p>Quick automation wins you can implement in minutes. New tips every day.</p>
+        <span class="feature-link">Read daily tips <i data-lucide="arrow-right"></i></span>
+      </a>
+      
+      <a href="/guides/" class="feature-card">
+        <div class="feature-icon">
+          <i data-lucide="book-open"></i>
+        </div>
+        <h3>In-Depth Guides</h3>
+        <p>Step-by-step tutorials for complex automation workflows and integrations.</p>
+        <span class="feature-link">Browse guides <i data-lucide="arrow-right"></i></span>
+      </a>
+      
+      <a href="/open-source/" class="feature-card">
+        <div class="feature-icon">
+          <i data-lucide="code-2"></i>
+        </div>
+        <h3>Open Source Tools</h3>
+        <p>Ready-to-use scripts and tools. Fork them, adapt them, make them yours.</p>
+        <span class="feature-link">View tools <i data-lucide="arrow-right"></i></span>
+      </a>
+      
+      <a href="/workshops/" class="feature-card">
+        <div class="feature-icon">
+          <i data-lucide="users"></i>
+        </div>
+        <h3>Workshops</h3>
+        <p>Hands-on sessions to level up your automation skills with expert guidance.</p>
+        <span class="feature-link">See workshops <i data-lucide="arrow-right"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Posts Section -->
+<section class="section latest" id="latest">
+  <div class="container">
+    <span class="section-label">
+      <i data-lucide="sparkles"></i>
+      Latest Content
+    </span>
+    <h2 class="section-title">Fresh automation insights</h2>
+    <p class="section-subtitle">The newest tips, guides, and tools from the blog.</p>
+    
+    <div class="posts-grid">
+      {{ range first 6 (where .Site.RegularPages "Section" "ne" "") }}
+      <a href="{{ .Permalink }}" class="post-card">
+        <div class="post-meta">
+          <span class="post-section">{{ .Section | title }}</span>
+          <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+        </div>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Summary | truncate 120 }}</p>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section cta-section" id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-bg-glow"></div>
+      <span class="section-label">
+        <i data-lucide="rocket"></i>
+        Ready to Automate?
+      </span>
+      <h2 class="cta-title">Let's build your automation system together</h2>
+      <p class="cta-subtitle">
+        Whether you need a custom solution or want to learn how to build your own — I can help.
+      </p>
+      <div class="cta-actions">
+        <a href="https://outlook.office365.com/owa/calendar/Letstalk1@lindamohamed.com/bookings/" class="btn btn-primary btn-large" target="_blank">
+          <i data-lucide="calendar"></i>
+          Book a Free Call
+        </a>
+        <a href="https://www.lindamohamed.com/workshops" class="btn btn-ghost btn-large" target="_blank">
+          <i data-lucide="graduation-cap"></i>
+          View Workshops
+        </a>
+      </div>
+      <p class="cta-note">
+        Questions? Email <span class="email-text">hello@lindamohamed.com</span>
+      </p>
+    </div>
+  </div>
+</section>
+{{ end }}

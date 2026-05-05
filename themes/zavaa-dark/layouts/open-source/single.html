@@ -1,0 +1,10 @@
+{{ define "main" }}
+{{ partial "pillar-link.html" . }}
+<article class="reveal" style="--delay:0s">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  {{ with .Params.github_url }}
+    <p><a href="{{ . }}">View on GitHub</a></p>
+  {{ end }}
+</article>
+{{ end }}

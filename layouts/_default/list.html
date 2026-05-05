@@ -1,0 +1,39 @@
+{{ define "main" }}
+<section class="list-hero">
+  <div class="container">
+    <div class="list-hero-inner">
+      <span class="section-label">
+        <i data-lucide="folder"></i>
+        {{ .Section | title }}
+      </span>
+      <h1 class="list-title">{{ .Title }}</h1>
+      {{ with .Params.description }}
+      <p class="list-subtitle">{{ . }}</p>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="list-body">
+  <div class="container">
+    <div class="posts-grid">
+      {{ range .Pages }}
+      <a href="{{ .Permalink }}" class="post-card">
+        <div class="post-meta">
+          <span class="post-section">{{ .Section | title }}</span>
+          <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+        </div>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Summary | truncate 150 }}</p>
+      </a>
+      {{ end }}
+    </div>
+    
+    {{ if eq (len .Pages) 0 }}
+    <div style="text-align: center; padding: 60px 0; color: var(--text-muted);">
+      <p>No posts yet. Check back soon!</p>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

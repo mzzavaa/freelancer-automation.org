@@ -1,0 +1,8 @@
+{{ with .Params.pillar }}
+  {{ $guide := site.GetPage "guides" . }}
+  {{ if $guide }}
+    <div class="pillar">
+      Part of the <a href="{{ $guide.Permalink }}">{{ $guide.Title }}</a> series.
+    </div>
+  {{ end }}
+{{ end }}

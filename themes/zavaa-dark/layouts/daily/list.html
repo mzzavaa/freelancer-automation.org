@@ -1,0 +1,18 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+<div class="posts">
+  {{ range $i, $p := .Paginator.Pages }}
+    <div class="card reveal" style="--delay:calc({{ $i }}*0.05s)">
+      <h2><a href="{{ $p.Permalink }}">{{ $p.Title }}</a></h2>
+      <small>{{ $p.Date.Format "2006-01-02" }}</small>
+      {{ with $p.Params.pillar }}<span class="pillar-tag">[{{ . }}]</span>{{ end }}
+    </div>
+  {{ end }}
+</div>
+{{ if .Paginator }}
+  <nav class="pagination">
+    {{ if .Paginator.HasPrev }}<a href="{{ .Paginator.Prev.URL }}">Previous</a>{{ end }}
+    {{ if .Paginator.HasNext }}<a href="{{ .Paginator.Next.URL }}">Next</a>{{ end }}
+  </nav>
+{{ end }}
+{{ end }}

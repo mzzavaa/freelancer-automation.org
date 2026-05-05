@@ -1,0 +1,43 @@
+{{/* determine schema type */}}
+{{ $schema := .Params.schema_type }}
+{{ if not $schema }}
+  {{ if in .Section "daily guides" }}
+    {{ $schema = "Article" }}
+  {{ else if eq .Section "open-source" }}
+    {{ $schema = "SoftwareSourceCode" }}
+  {{ else if eq .Section "workshops" }}
+    {{ $schema = "Course" }}
+  {{ else }}
+    {{ $schema = "Article" }}
+  {{ end }}
+{{ end }}
+
+<script type="application/ld+json">
+{{- /* Build JSON depending on type */}}
+{{- if eq $schema "Article" }}
+  {{- $pub := .Date.Format "2006-01-02" }}{{- $mod := .Lastmod.Format "2006-01-02" }}{{- $obj := dict "@context" "https://schema.org" "@type" "Article" "headline" .Title "datePublished" $pub "dateModified" $mod "description" .Params.description "author" (dict "@type" "Person" "name" .Site.Title) "publisher" (dict "@type" "Organization" "name" .Site.Title) }}
+  {{- $obj | jsonify }}
+{{- else if eq $schema "SoftwareSourceCode" }}
+  {{- $obj := dict "@context" "https://schema.org" "@type" "SoftwareSourceCode" "name" .Title "description" .Params.description "codeRepository" .Params.github_url "programmingLanguage" .Params.language }}
+  {{- $obj | jsonify }}
+{{- else if eq $schema "Course" }}
+  {{- $obj := dict "@context" "https://schema.org" "@type" "Course" "name" .Title "description" .Params.description "provider" (dict "@type" "Organization" "name" .Site.Title) "offers" (dict "@type" "Offer" "url" .Permalink) }}
+  {{- $obj | jsonify }}
+{{- else if eq $schema "FAQPage" }}
+  {{- /* fallback; handled below */}}
+{{- else }}
+  {{- $obj := dict "@context" "https://schema.org" "@type" $schema }}
+  {{- $obj | jsonify }}
+{{- end }}
+</script>
+{{/* FAQ supplement */}}
+{{ with .Params.faq }}
+<script type="application/ld+json">
+  {{- $faqs := slice }}
+  {{- range . }}
+    {{- $q := dict "@type" "Question" "name" .question "acceptedAnswer" (dict "@type" "Answer" "text" .answer) }}
+    {{- $faqs = $faqs | append $q }}
+  {{- end }}
+  {{- (dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $faqs) | jsonify }}
+</script>
+{{ end }}
